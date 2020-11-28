@@ -21,7 +21,7 @@ services:
       - "${HTTPS_PORT}:443"
     volumes:
       - wordpress_files:/var/www/html/
-      - ./.htaccess:/var/www/html/.htaccess
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     restart: always
     environment:
       WORDPRESS_DB_HOST: db:3306
