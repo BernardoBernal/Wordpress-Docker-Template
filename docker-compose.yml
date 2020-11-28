@@ -28,6 +28,21 @@ services:
       WORDPRESS_DB_USER: ${MYSQL_USER}
       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
       WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - web-root:/var/www/html
+    depends_on:
+      - wordpress
+    command: certonly --webroot --webroot-path=/var/www/html --email info@bernardobernal.com --agree-tos --no-eff-email --staging -d refaccionariahc.com  -d www.refaccionariahc.com
+
 volumes:
   db_data:
   wordpress_files:
+  certbot-etc:
+  certbot-var:
+  web-root:
