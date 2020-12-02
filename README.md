@@ -58,12 +58,12 @@ frontend http_front
         bind 0.0.0.0:443 ssl crt /etc/haproxy/certs/${DOMAIN}.pem
         http-request redirect scheme https unless { ssl_fc }
         timeout client 10s
-        use_backend server if { hdr(host) -i www.${DOMAIN}.com }
-        use_backend server if { hdr(host) -i ${DOMAIN}.com }
+        use_backend server_name if { hdr(host) -i www.${DOMAIN}.com }
+        use_backend server_name if { hdr(host) -i ${DOMAIN}.com }
 
-backend server
+backend server_name
         mode http
-        server refaccionariahp_server 127.0.0.1:443 
+        server ${DOMAIN}_server 127.0.0.1:443 
         timeout server 10s
         timeout connect 10s
 
