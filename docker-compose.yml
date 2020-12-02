@@ -38,7 +38,7 @@ services:
       - web-root:/var/www/html
     depends_on:
       - wordpress
-    command: certonly --webroot --webroot-path=/var/www/html --email ${EMAIL} --agree-tos --no-eff-email --staging -d ${DOMAIN}  -d www.${DOMAIN}
+    command: certonly --webroot --webroot-path=/var/www/html --email ${EMAIL} --agree-tos --no-eff-email --force-renewal  -d ${DOMAIN}  -d www.${DOMAIN}
 
 volumes:
   db_data:
